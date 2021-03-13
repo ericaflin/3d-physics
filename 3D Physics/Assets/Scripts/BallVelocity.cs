@@ -5,27 +5,45 @@ using UnityEngine;
 public class BallVelocity : MonoBehaviour
 {
     public Rigidbody rb;
-    public float startingVelocity;
+    public Lens lens;
     private bool hasBeenRefracted;
-    private Vector3 startingForce;
+    public Vector3 startingPosition;
+    public Vector3 startingVelocity;
+    private Vector3 imagePosition;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        startingForce = new Vector3(0.5f, 1.0f, 0.5f);
-        startingForce = startingVelocity * startingForce;
-        rb.AddForce(startingForce);
+        rb.velocity = startingVelocity;
+        var imageDistance = 1 / ((1/lens.focalLength) - (1/Mathf.Abs(startingPosition.z)));
+        var imageRatio = -(imageDistance / startingPosition.z);
+        imagePosition = new Vector3(startingPosition.x * imageRatio, startingPosition.y * imageRatio, imageDistance);
         hasBeenRefracted = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!hasBeenRefracted && rb.transform.position.y > 0)
+        if (CheckIfInRefractionRegion())
         {
-            rb.AddForce(new Vector3(startingForce.x, 0, startingForce.z));
+            rb.velocity = (imagePosition - this.transform.position).normalized * startingVelocity.magnitude;
+            print(rb.velocity);
             hasBeenRefracted = true;
         }
+    }
+
+    bool CheckIfInRefractionRegion()
+    {
+        if (!hasBeenRefracted)
+        {
+            var ballPosition = this.transform.position;
+            var lensPosition = lens.transform.position;
+            if (ballPosition.z > lensPosition.z)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }

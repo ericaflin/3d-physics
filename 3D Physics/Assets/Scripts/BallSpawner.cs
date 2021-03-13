@@ -5,8 +5,11 @@ using UnityEngine;
 public class BallSpawner : MonoBehaviour
 {
     public BallVelocity ballPrefab;
-    public float startingVelocity;
+    public float startingSpeed;
     public Vector3 startingPosition;
+    public float spawnRadius;
+    public bool spawnPoint;
+    public Lens lens;
     private int counter = 0;
 
     // Start is called before the first frame update
@@ -17,10 +20,25 @@ public class BallSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (counter % 150 == 0)
+        if (counter % 1 == 0)
         {
-            BallVelocity ball = Instantiate(ballPrefab, startingPosition, Quaternion.identity);
-            ball.startingVelocity = startingVelocity;
+            var spawnPosition = startingPosition;
+            var spawnOffset = Random.insideUnitCircle * spawnRadius;
+            var spawnVelocity = new Vector3();
+            if (spawnPoint)
+            {
+                spawnVelocity = ((new Vector3(spawnOffset.x, spawnOffset.y, 0) - spawnPosition).normalized) * startingSpeed;
+            }
+            else
+            {
+                spawnPosition.x += spawnOffset.x;
+                spawnPosition.y += spawnOffset.y;
+                spawnVelocity = new Vector3(0, 0, startingSpeed);
+            }
+            BallVelocity ball = Instantiate(ballPrefab, spawnPosition, Quaternion.identity);
+            ball.startingPosition = spawnPosition;
+            ball.startingVelocity = spawnVelocity;
+            ball.lens = lens;
         }
         counter++;
     }
