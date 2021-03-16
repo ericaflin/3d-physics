@@ -42,4 +42,9 @@ public class BallSpawner : MonoBehaviour
         }
         counter++;
     }
+
+    public void setFocalLength(int value)
+    {
+        this.lens.focalLength = value;
+    }
 }

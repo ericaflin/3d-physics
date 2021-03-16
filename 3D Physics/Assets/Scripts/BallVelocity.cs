@@ -10,14 +10,34 @@ public class BallVelocity : MonoBehaviour
     public Vector3 startingPosition;
     public Vector3 startingVelocity;
     private Vector3 imagePosition;
+    private bool virtualImage;
+    private bool spawnPointIsFocalLength;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.velocity = startingVelocity;
-        var imageDistance = 1 / ((1/lens.focalLength) - (1/Mathf.Abs(startingPosition.z)));
-        var imageRatio = -(imageDistance / startingPosition.z);
+        var startingDistance = Mathf.Abs(startingPosition.z);
+        if (lens.focalLength == startingDistance)
+        {
+            spawnPointIsFocalLength = true;
+        }
+        else
+        {
+            spawnPointIsFocalLength = false;
+        }
+        var imageDistance = 1 / ((1/lens.focalLength) - (1/startingDistance));
+        var imageRatio = -(imageDistance / startingDistance);
+        if (imageDistance < 0)
+        {
+            virtualImage = true;
+            spawnPointIsFocalLength = false;
+        }
+        else
+        {
+            virtualImage = false;
+        }
         imagePosition = new Vector3(startingPosition.x * imageRatio, startingPosition.y * imageRatio, imageDistance);
         hasBeenRefracted = false;
     }
@@ -27,9 +47,23 @@ public class BallVelocity : MonoBehaviour
     {
         if (CheckIfInRefractionRegion())
         {
-            rb.velocity = (imagePosition - this.transform.position).normalized * startingVelocity.magnitude;
-            print(rb.velocity);
+            if (spawnPointIsFocalLength)
+            {
+                rb.velocity = (lens.transform.position - startingPosition).normalized * startingVelocity.magnitude;
+            }
+            else if (virtualImage)
+            {
+                rb.velocity = -(imagePosition - this.transform.position).normalized * startingVelocity.magnitude;
+            }
+            else
+            {
+                rb.velocity = (imagePosition - this.transform.position).normalized * startingVelocity.magnitude;
+            }
             hasBeenRefracted = true;
+        }
+        if (CheckIfInImageRegion())
+        {
+            Destroy(this.gameObject);
         }
     }
 
@@ -40,6 +74,18 @@ public class BallVelocity : MonoBehaviour
             var ballPosition = this.transform.position;
             var lensPosition = lens.transform.position;
             if (ballPosition.z > lensPosition.z)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool CheckIfInImageRegion()
+    {
+        if (hasBeenRefracted)
+        {
+            if (this.transform.position.z > imagePosition.z)
             {
                 return true;
             }

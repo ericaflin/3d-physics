@@ -55,9 +55,12 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\SwitchScene.cs" />
     <Compile Include="Assets\Scripts\BallSpawner.cs" />
-    <Compile Include="Assets\Scripts\ARTapToPlaceObject.cs" />
-    <Compile Include="Assets\Scripts\BallVelocity.cs" />
     <Compile Include="Assets\Scripts\Lens.cs" />
+    <Compile Include="Assets\Scripts\ImageTracker.cs" />
+    <Compile Include="Assets\Scripts\ARTapToPlaceObject.cs" />
+    <Compile Include="Assets\Scripts\ChangeFocalLength.cs" />
+    <Compile Include="Assets\Scripts\BallVelocity.cs" />
+    <Compile Include="Assets\Scripts\SliderController.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

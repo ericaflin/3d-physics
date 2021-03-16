@@ -5,6 +5,7 @@ ScriptsOnlyBuild:
     - BallSpawner
     - BallVelocity
     - Lens
+    - SliderController
     - SwitchScene
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
@@ -26,6 +27,7 @@ ScriptsOnlyBuild:
     - UnityEngine.XR.ARFoundation.ARRaycastManager
     - UnityEngine.XR.ARFoundation.ARSession
     - UnityEngine.XR.ARFoundation.ARSessionOrigin
+    - UnityEngine.XR.ARFoundation.ARTrackedImageManager
     Unity.XR.Management.Editor.dll:
     - UnityEditor.XR.Management.XRGeneralSettingsPerBuildTarget
     Unity.XR.Management.dll:
@@ -44,6 +46,9 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Slider
+    - UnityEngine.UI.Text
+    - UnityEngine.UI.Toggle
   sceneClasses:
     Assets/Scenes/Game.unity:
     - Class: 1
@@ -75,47 +80,57 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1540}
+      Script: {instanceID: 1538}
     - Class: 114
-      Script: {instanceID: 1558}
+      Script: {instanceID: 1556}
     - Class: 114
-      Script: {instanceID: 1628}
+      Script: {instanceID: 1626}
     - Class: 114
-      Script: {instanceID: 1764}
+      Script: {instanceID: 1638}
     - Class: 114
-      Script: {instanceID: 1800}
+      Script: {instanceID: 1688}
     - Class: 114
-      Script: {instanceID: 2326}
+      Script: {instanceID: 1762}
     - Class: 114
-      Script: {instanceID: 2352}
+      Script: {instanceID: 1798}
     - Class: 114
-      Script: {instanceID: 2424}
+      Script: {instanceID: 2028}
     - Class: 114
-      Script: {instanceID: 2472}
+      Script: {instanceID: 2096}
     - Class: 114
-      Script: {instanceID: 2578}
+      Script: {instanceID: 2328}
     - Class: 114
-      Script: {instanceID: 2758}
+      Script: {instanceID: 2354}
     - Class: 114
-      Script: {instanceID: 2854}
+      Script: {instanceID: 2426}
     - Class: 114
-      Script: {instanceID: 3014}
+      Script: {instanceID: 2474}
     - Class: 114
-      Script: {instanceID: 3150}
+      Script: {instanceID: 2580}
     - Class: 114
-      Script: {instanceID: 3214}
+      Script: {instanceID: 2760}
     - Class: 114
-      Script: {instanceID: 3372}
+      Script: {instanceID: 2856}
     - Class: 114
-      Script: {instanceID: 3420}
+      Script: {instanceID: 3016}
     - Class: 114
-      Script: {instanceID: 3650}
+      Script: {instanceID: 3152}
     - Class: 114
-      Script: {instanceID: 3688}
+      Script: {instanceID: 3216}
     - Class: 114
-      Script: {instanceID: 4206}
+      Script: {instanceID: 3374}
     - Class: 114
-      Script: {instanceID: 15866}
+      Script: {instanceID: 3422}
+    - Class: 114
+      Script: {instanceID: 3654}
+    - Class: 114
+      Script: {instanceID: 3692}
+    - Class: 114
+      Script: {instanceID: 4210}
+    - Class: 114
+      Script: {instanceID: 4264}
+    - Class: 114
+      Script: {instanceID: 16354}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -160,29 +175,29 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1540}
+      Script: {instanceID: 1538}
     - Class: 114
-      Script: {instanceID: 1558}
+      Script: {instanceID: 1556}
     - Class: 114
-      Script: {instanceID: 1764}
+      Script: {instanceID: 1762}
     - Class: 114
-      Script: {instanceID: 2024}
+      Script: {instanceID: 2022}
     - Class: 114
-      Script: {instanceID: 2326}
+      Script: {instanceID: 2328}
     - Class: 114
-      Script: {instanceID: 2424}
+      Script: {instanceID: 2426}
     - Class: 114
-      Script: {instanceID: 2472}
+      Script: {instanceID: 2474}
     - Class: 114
-      Script: {instanceID: 2578}
+      Script: {instanceID: 2580}
     - Class: 114
-      Script: {instanceID: 2758}
+      Script: {instanceID: 2760}
     - Class: 114
-      Script: {instanceID: 2854}
+      Script: {instanceID: 2856}
     - Class: 114
-      Script: {instanceID: 3788}
+      Script: {instanceID: 3792}
     - Class: 114
-      Script: {instanceID: 4050}
+      Script: {instanceID: 4054}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -346,6 +361,12 @@ ScriptsOnlyBuild:
     className: PlaymodeTestsController
   - hash:
       serializedVersion: 2
+      Hash: 26153a36d84a9a7a52d7eeca6a6faf31
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Lens
+  - hash:
+      serializedVersion: 2
       Hash: dc1bf7169b005112f7a4da5a6b15f0c4
     assemblyName: Unity.XR.ARKit.dll
     namespaceName: UnityEngine.XR.ARKit
@@ -362,6 +383,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.XR.ARFoundation.dll
     namespaceName: UnityEngine.XR.ARFoundation
     className: ARParticipantManager
+  - hash:
+      serializedVersion: 2
+      Hash: 055b2cb90360cf281513462fabe26165
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ImageTracker
   - hash:
       serializedVersion: 2
       Hash: 5f170942ee57c7a568f5bcfc7521adea
@@ -689,6 +716,12 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ChangeFocalLength
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.XR.ARKit.dll
     namespaceName: UnityEngine.XR.ARKit
     className: ARKitLoaderSettings
@@ -934,10 +967,10 @@ ScriptsOnlyBuild:
     className: TouchInputModule
   - hash:
       serializedVersion: 2
-      Hash: 26153a36d84a9a7a52d7eeca6a6faf31
+      Hash: 3c57ab06b7422b3007b02d9c274afd77
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: Lens
+    className: SliderController
   platform: 13
   scenePathNames:
   - Assets/Scenes/UI.unity
