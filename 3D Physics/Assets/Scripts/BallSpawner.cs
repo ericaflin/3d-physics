@@ -24,6 +24,7 @@ public class BallSpawner : MonoBehaviour
         {
             var spawnPosition = startingPosition;
             var spawnOffset = Random.insideUnitCircle * spawnRadius;
+            //print(spawnOffset);
             var spawnVelocity = new Vector3();
             if (spawnPoint)
             {
@@ -43,8 +44,4 @@ public class BallSpawner : MonoBehaviour
         counter++;
     }
 
-    public void setFocalLength(int value)
-    {
-        this.lens.focalLength = value;
-    }
 }

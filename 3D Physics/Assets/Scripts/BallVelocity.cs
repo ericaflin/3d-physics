@@ -72,7 +72,7 @@ public class BallVelocity : MonoBehaviour
         if (!hasBeenRefracted)
         {
             var ballPosition = this.transform.position;
-            var lensPosition = lens.transform.position;
+            var lensPosition = lens.pose.position;
             if (ballPosition.z > lensPosition.z)
             {
                 return true;
@@ -85,9 +85,17 @@ public class BallVelocity : MonoBehaviour
     {
         if (hasBeenRefracted)
         {
-            if (this.transform.position.z > imagePosition.z)
+            if (imagePosition.z > 0)
             {
-                return true;
+                if (this.transform.position.z > imagePosition.z)
+                {
+                    return true;
+                }
+            } else {
+                if (this.transform.position.z > 0.5)
+                {
+                    return true;
+                }
             }
         }
         return false;

@@ -26,6 +26,7 @@ public class SliderController : MonoBehaviour
         spawner.startingPosition.z = -zSlider.value;
         spawner.startingSpeed = speedSlider.value;
         spawner.lens.focalLength = focalLengthSlider.value;
+        spawner.lens.transform.localScale = new Vector3(1.5f, 1.5f, spawner.lens.focalLength * 3);
         spawner.spawnPoint = emissionMode.isOn;
     }
 }
