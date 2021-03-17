@@ -12,12 +12,45 @@ public class BallVelocity : MonoBehaviour
     private Vector3 imagePosition;
     private bool virtualImage;
     private bool spawnPointIsFocalLength;
+    const float PHOTON_MAX_DISTANCE = 1;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.velocity = startingVelocity;
+        CalculateImagePosition();
+        hasBeenRefracted = false;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (CheckIfInRefractionRegion())
+        {
+            CalculateImagePosition();
+            if (spawnPointIsFocalLength)
+            {
+                rb.velocity = (lens.pose.position - startingPosition).normalized * startingVelocity.magnitude;
+            }
+            else if (virtualImage)
+            {
+                rb.velocity = -(imagePosition - this.transform.position).normalized * startingVelocity.magnitude;
+            }
+            else
+            {
+                rb.velocity = (imagePosition - this.transform.position).normalized * startingVelocity.magnitude;
+            }
+            hasBeenRefracted = true;
+        }
+        if (CheckIfInImageRegion())
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    void CalculateImagePosition()
+    {
         var startingDistance = Mathf.Abs(startingPosition.z);
         if (lens.focalLength == startingDistance)
         {
@@ -39,32 +72,6 @@ public class BallVelocity : MonoBehaviour
             virtualImage = false;
         }
         imagePosition = new Vector3(startingPosition.x * imageRatio, startingPosition.y * imageRatio, imageDistance);
-        hasBeenRefracted = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (CheckIfInRefractionRegion())
-        {
-            if (spawnPointIsFocalLength)
-            {
-                rb.velocity = (lens.transform.position - startingPosition).normalized * startingVelocity.magnitude;
-            }
-            else if (virtualImage)
-            {
-                rb.velocity = -(imagePosition - this.transform.position).normalized * startingVelocity.magnitude;
-            }
-            else
-            {
-                rb.velocity = (imagePosition - this.transform.position).normalized * startingVelocity.magnitude;
-            }
-            hasBeenRefracted = true;
-        }
-        if (CheckIfInImageRegion())
-        {
-            Destroy(this.gameObject);
-        }
     }
 
     bool CheckIfInRefractionRegion()
@@ -87,7 +94,7 @@ public class BallVelocity : MonoBehaviour
         {
             if (imagePosition.z > 0)
             {
-                if (this.transform.position.z > imagePosition.z)
+                if (this.transform.position.z > Mathf.Min(imagePosition.z, PHOTON_MAX_DISTANCE))
                 {
                     return true;
                 }
