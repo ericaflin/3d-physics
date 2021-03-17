@@ -9,6 +9,8 @@ public class BallVelocity : MonoBehaviour
     private bool hasBeenRefracted;
     public Vector3 startingPosition;
     public Vector3 startingVelocity;
+    private Vector3 worldPosition;
+    private Vector3 worldVelocity;
     private Vector3 imagePosition;
     private bool virtualImage;
     private bool spawnPointIsFocalLength;
@@ -18,7 +20,7 @@ public class BallVelocity : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.velocity = startingVelocity;
+        rb.velocity = this.transform.parent.TransformDirection(startingVelocity);
         CalculateImagePosition();
         hasBeenRefracted = false;
     }
@@ -26,23 +28,26 @@ public class BallVelocity : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Vector3 vel = rb.velocity;
         if (CheckIfInRefractionRegion())
         {
             CalculateImagePosition();
             if (spawnPointIsFocalLength)
             {
-                rb.velocity = (lens.pose.position - startingPosition).normalized * startingVelocity.magnitude;
+                vel = (lens.pose.position - startingPosition).normalized * startingVelocity.magnitude;
             }
             else if (virtualImage)
             {
-                rb.velocity = -(imagePosition - this.transform.position).normalized * startingVelocity.magnitude;
+                vel = -(imagePosition - this.transform.position).normalized * startingVelocity.magnitude;
             }
             else
             {
-                rb.velocity = (imagePosition - this.transform.position).normalized * startingVelocity.magnitude;
+                vel = (imagePosition - this.transform.position).normalized * startingVelocity.magnitude;
             }
             hasBeenRefracted = true;
         }
+        rb.velocity = this.transform.parent.TransformDirection(vel);
+
         if (CheckIfInImageRegion())
         {
             Destroy(this.gameObject);
@@ -71,15 +76,15 @@ public class BallVelocity : MonoBehaviour
         {
             virtualImage = false;
         }
-        imagePosition = new Vector3(startingPosition.x * imageRatio, startingPosition.y * imageRatio, imageDistance);
+        imagePosition = this.transform.parent.InverseTransformDirection(new Vector3(startingPosition.x * imageRatio, startingPosition.y * imageRatio, imageDistance));
     }
 
     bool CheckIfInRefractionRegion()
     {
         if (!hasBeenRefracted)
         {
-            var ballPosition = this.transform.position;
-            var lensPosition = lens.pose.position;
+            var ballPosition = this.transform.parent.InverseTransformDirection(this.transform.position);
+            var lensPosition = this.transform.parent.InverseTransformDirection(lens.pose.position);
             if (ballPosition.z > lensPosition.z)
             {
                 return true;
@@ -92,14 +97,15 @@ public class BallVelocity : MonoBehaviour
     {
         if (hasBeenRefracted)
         {
+            Vector3 pos = this.transform.parent.InverseTransformDirection(this.transform.position);
             if (imagePosition.z > 0)
             {
-                if (this.transform.position.z > Mathf.Min(imagePosition.z, PHOTON_MAX_DISTANCE))
+                if (pos.z > Mathf.Min(imagePosition.z, PHOTON_MAX_DISTANCE))
                 {
                     return true;
                 }
             } else {
-                if (this.transform.position.z > 0.5)
+                if (pos.z > 0.5)
                 {
                     return true;
                 }
