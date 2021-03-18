@@ -21,9 +21,9 @@ public class SliderController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        spawner.startingPosition.x = xSlider.value;
+        spawner.startingPosition.x = -xSlider.value;
         spawner.startingPosition.y = ySlider.value;
-        spawner.startingPosition.z = -zSlider.value;
+        spawner.startingPosition.z = zSlider.value;
         spawner.startingSpeed = speedSlider.value;
         spawner.lens.focalLength = focalLengthSlider.value;
         spawner.spawnPoint = emissionMode.isOn;

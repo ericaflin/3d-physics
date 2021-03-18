@@ -27,7 +27,6 @@ ScriptsOnlyBuild:
     - UnityEngine.XR.ARFoundation.ARRaycastManager
     - UnityEngine.XR.ARFoundation.ARSession
     - UnityEngine.XR.ARFoundation.ARSessionOrigin
-    - UnityEngine.XR.ARFoundation.ARTrackedImageManager
     Unity.XR.Management.Editor.dll:
     - UnityEditor.XR.Management.XRGeneralSettingsPerBuildTarget
     Unity.XR.Management.dll:
@@ -46,6 +45,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.RawImage
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
     - UnityEngine.UI.Toggle
@@ -90,52 +90,48 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1688}
     - Class: 114
-      Script: {instanceID: 1762}
+      Script: {instanceID: 1712}
     - Class: 114
-      Script: {instanceID: 1798}
+      Script: {instanceID: 1764}
     - Class: 114
-      Script: {instanceID: 2028}
+      Script: {instanceID: 1800}
     - Class: 114
-      Script: {instanceID: 2096}
+      Script: {instanceID: 2030}
     - Class: 114
-      Script: {instanceID: 2328}
+      Script: {instanceID: 2098}
     - Class: 114
-      Script: {instanceID: 2354}
+      Script: {instanceID: 2330}
     - Class: 114
-      Script: {instanceID: 2426}
+      Script: {instanceID: 2356}
     - Class: 114
-      Script: {instanceID: 2474}
+      Script: {instanceID: 2428}
     - Class: 114
-      Script: {instanceID: 2580}
+      Script: {instanceID: 2476}
     - Class: 114
-      Script: {instanceID: 2760}
+      Script: {instanceID: 2582}
     - Class: 114
-      Script: {instanceID: 2856}
+      Script: {instanceID: 2762}
     - Class: 114
-      Script: {instanceID: 3016}
+      Script: {instanceID: 2858}
     - Class: 114
-      Script: {instanceID: 3152}
+      Script: {instanceID: 3018}
     - Class: 114
-      Script: {instanceID: 3216}
+      Script: {instanceID: 3154}
     - Class: 114
-      Script: {instanceID: 3374}
+      Script: {instanceID: 3218}
     - Class: 114
-      Script: {instanceID: 3422}
+      Script: {instanceID: 3376}
+    - Class: 114
+      Script: {instanceID: 3424}
     - Class: 114
       Script: {instanceID: 3654}
     - Class: 114
       Script: {instanceID: 3692}
     - Class: 114
       Script: {instanceID: 4210}
-    - Class: 114
-      Script: {instanceID: 4264}
-    - Class: 114
-      Script: {instanceID: 16354}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
-      Script: {instanceID: 0}
-    - Class: 135
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -179,21 +175,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1556}
     - Class: 114
-      Script: {instanceID: 1762}
+      Script: {instanceID: 1764}
     - Class: 114
-      Script: {instanceID: 2022}
+      Script: {instanceID: 2024}
     - Class: 114
-      Script: {instanceID: 2328}
+      Script: {instanceID: 2160}
     - Class: 114
-      Script: {instanceID: 2426}
+      Script: {instanceID: 2330}
     - Class: 114
-      Script: {instanceID: 2474}
+      Script: {instanceID: 2428}
     - Class: 114
-      Script: {instanceID: 2580}
+      Script: {instanceID: 2476}
     - Class: 114
-      Script: {instanceID: 2760}
+      Script: {instanceID: 2582}
     - Class: 114
-      Script: {instanceID: 2856}
+      Script: {instanceID: 2762}
+    - Class: 114
+      Script: {instanceID: 2858}
     - Class: 114
       Script: {instanceID: 3792}
     - Class: 114
@@ -307,6 +305,12 @@ ScriptsOnlyBuild:
     className: HorizontalLayoutGroup
   - hash:
       serializedVersion: 2
+      Hash: 3c57ab06b7422b3007b02d9c274afd77
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SliderController
+  - hash:
+      serializedVersion: 2
       Hash: caa533b001ae39b864ba8425019e2268
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -361,7 +365,7 @@ ScriptsOnlyBuild:
     className: PlaymodeTestsController
   - hash:
       serializedVersion: 2
-      Hash: 26153a36d84a9a7a52d7eeca6a6faf31
+      Hash: af9f8f85c2179be7a5c1f683654bced2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Lens
@@ -716,12 +720,6 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ChangeFocalLength
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.XR.ARKit.dll
     namespaceName: UnityEngine.XR.ARKit
     className: ARKitLoaderSettings
@@ -965,12 +963,6 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
     className: TouchInputModule
-  - hash:
-      serializedVersion: 2
-      Hash: 3c57ab06b7422b3007b02d9c274afd77
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: SliderController
   platform: 13
   scenePathNames:
   - Assets/Scenes/UI.unity

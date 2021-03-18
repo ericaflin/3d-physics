@@ -16,6 +16,8 @@ public class Lens : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        pose.position = this.transform.parent.position;
+        pose.rotation = Quaternion.FromToRotation(Vector3.forward, Vector3.left);
         if (focalLength > 0)
         {
             focalLengthPositive = true;

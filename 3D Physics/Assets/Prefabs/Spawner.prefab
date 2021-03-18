@@ -47,7 +47,7 @@ MonoBehaviour:
   ballPrefab: {fileID: 7802543532798853056, guid: eb08c71794f7af34ba67629a3733fe64,
     type: 3}
   startingSpeed: 1
-  startingPosition: {x: 0, y: 0, z: -0.5}
+  startingPosition: {x: -0.5, y: 0, z: 0}
   spawnRadius: 0.1
   spawnPoint: 1
   lens: {fileID: 4457765540190214026}

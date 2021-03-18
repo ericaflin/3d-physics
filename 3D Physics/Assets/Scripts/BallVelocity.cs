@@ -51,7 +51,7 @@ public class BallVelocity : MonoBehaviour
 
     void CalculateImagePosition()
     {
-        var startingDistance = Mathf.Abs(startingPosition.z);
+        var startingDistance = Mathf.Abs(startingPosition.x);
         if (lens.focalLength == startingDistance)
         {
             spawnPointIsFocalLength = true;
@@ -71,7 +71,10 @@ public class BallVelocity : MonoBehaviour
         {
             virtualImage = false;
         }
-        imagePosition = new Vector3(startingPosition.x * imageRatio, startingPosition.y * imageRatio, imageDistance);
+        print(startingPosition);
+        print(lens.pose.position);
+        imagePosition = lens.pose.position + (new Vector3(imageDistance, (startingPosition.y - lens.pose.position.y) * imageRatio, (startingPosition.z - lens.pose.position.z) * imageRatio));
+
     }
 
     bool CheckIfInRefractionRegion()
@@ -80,7 +83,7 @@ public class BallVelocity : MonoBehaviour
         {
             var ballPosition = this.transform.position;
             var lensPosition = lens.pose.position;
-            if (ballPosition.z > lensPosition.z)
+            if (ballPosition.x > lensPosition.x)
             {
                 return true;
             }
@@ -92,14 +95,14 @@ public class BallVelocity : MonoBehaviour
     {
         if (hasBeenRefracted)
         {
-            if (imagePosition.z > 0)
+            if (imagePosition.x > 0)
             {
-                if (this.transform.position.z > Mathf.Min(imagePosition.z, PHOTON_MAX_DISTANCE))
+                if (this.transform.position.x > Mathf.Min(imagePosition.x, PHOTON_MAX_DISTANCE))
                 {
                     return true;
                 }
             } else {
-                if (this.transform.position.z > 0.5)
+                if (this.transform.position.x > 0.5)
                 {
                     return true;
                 }

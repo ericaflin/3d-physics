@@ -28,14 +28,15 @@ public class BallSpawner : MonoBehaviour
             var spawnVelocity = new Vector3();
             if (spawnPoint)
             {
-                spawnVelocity = ((new Vector3(spawnOffset.x, spawnOffset.y, 0) - spawnPosition).normalized) * startingSpeed;
+                spawnVelocity = ((new Vector3(0, spawnOffset.y, spawnOffset.x) - spawnPosition).normalized) * startingSpeed;
             }
             else
             {
-                spawnPosition.x = spawnOffset.x;
+                spawnPosition.z = spawnOffset.x;
                 spawnPosition.y = spawnOffset.y;
-                spawnVelocity = new Vector3(0, 0, startingSpeed);
+                spawnVelocity = new Vector3(startingSpeed, 0, 0);
             }
+            spawnPosition = this.transform.position + spawnPosition;
             BallVelocity ball = Instantiate(ballPrefab, spawnPosition, Quaternion.identity);
             ball.startingPosition = spawnPosition;
             ball.startingVelocity = spawnVelocity;
