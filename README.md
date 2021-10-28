@@ -10,3 +10,7 @@ NOTE: This app is designed for Android devices on version 7.0 and higher.
 - Launch the app from your device and select "Your Models" and "Refraction (Lens)" to view our implemented model.
   - Find a location with a flat surface at least 1 square meter in size for the best results.
   - You may be prompted to install Google Play Services for AR; if so, install it.
+
+## Demo
+Video of prototype:
+https://www.youtube.com/watch?v=jvOnga9p6cE
